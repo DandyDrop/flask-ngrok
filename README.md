@@ -33,11 +33,11 @@ app = Flask(__name__)
 # Patch Flask app.run function to also run ngrok when called
 patch_to_run_with_ngrok(app)  
 
-@app.route("/")
+@app.route('/')
 def hello():
-    return "Hello, World!"
+    return 'Hello, World!'
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run()
 ```
 ---
@@ -51,20 +51,22 @@ app = Flask(__name__)
 
 
 def hello():
-    return "Hello, World!"
+    return 'Hello, World!'
 
 
 def set_up_app(app_to_set_up: Flask):
     patch_to_run_with_ngrok(app_to_set_up)
-    app_to_set_up.add_url_rule("/", "hello", hello, methods=["GET"])
+    app_to_set_up.add_url_rule('/', 'hello', hello, methods=['GET'])
 
 
 def main():
     set_up_app(app)
-    app.run(host="0.0.0.0", port=3000)
+    app.run('0.0.0.0', 3000)  
+    # Note that you can specify port positionally
+    # (you don't need to use keyword args syntax like port=...)
  
     
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
 ```
 
